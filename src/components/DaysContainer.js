@@ -19,6 +19,8 @@ const DaysContainer = props => {
   };
 
   const isSelected = date => {
+    // checks all variations of start and end dates before trying to access
+    // methods that might not exist i.e. one of them is the initial empty string value
     if (!props.startDate && !props.endDate) return false;
     else if (!props.endDate && props.startDate) {
       return props.startDate.getTime() === date.getTime();
@@ -34,6 +36,7 @@ const DaysContainer = props => {
   const populateDays = () => {
     let days = [];
     for (let i = 1; i <= props.days; i++) {
+      // so the Day component has full access to the date object in the future if necessary
       const date = new Date(props.currentYear, props.currentMonth, i);
       days.push(
         <Day

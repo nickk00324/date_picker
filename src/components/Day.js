@@ -28,6 +28,7 @@ const Day = props => {
     <DayStyles
       isSelected={props.isSelected}
       isIncludedInSelection={props.isIncludedInSelection}
+      // TODO fix the prop drilling that is going on here
       onClick={props.handleClick}
     >
       {props.day}

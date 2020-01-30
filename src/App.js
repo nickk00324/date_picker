@@ -51,6 +51,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //this is set as a date so it doesn't throw an error before it gets the chance to update
+      //with the current date
       currentDate: new Date(),
       startDate: "",
       endDate: "",
@@ -64,6 +66,7 @@ export default class App extends Component {
   }
 
   getCurrentDate = () => {
+    // setting the date with no arguments makes it so the user can't set today as a start date
     let date = new Date();
     const year = date.getFullYear();
     const month = date.getMonth();
@@ -93,6 +96,7 @@ export default class App extends Component {
       e.target.textContent
     );
     let dateArr = clickedDate.toString().split(" ");
+    // so the user can't choose a start date in the past
     if (clickedDate < this.state.currentDate) return;
     switch (this.state.picker) {
       case "start":
@@ -106,6 +110,8 @@ export default class App extends Component {
         });
         break;
       case "end":
+        // instead of preventing the user from choosing, just set the end date
+        // as the start date if it's before the start date
         if (this.state.startDate && clickedDate < this.state.startDate) {
           this.setState({
             startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
@@ -115,6 +121,9 @@ export default class App extends Component {
         } else {
           this.setState({
             endDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+            // initializing start and end dates as empty strings allow easy checking
+            // but also kind of repetitive checks preventing trying to access methods
+            // that don't exist
             endDate: !this.state.startDate ? "" : clickedDate,
             startDate: !this.state.startDate
               ? clickedDate
