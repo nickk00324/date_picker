@@ -116,7 +116,9 @@ export default class App extends Component {
           this.setState({
             startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
             startDate: clickedDate,
-            picker: "end"
+            picker: "end",
+            endDate: "",
+            endDateString: ""
           });
         } else {
           this.setState({
