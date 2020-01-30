@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/date-picker/static/js/main.83267219.chunk.js",
+    "main.js.map": "/date-picker/static/js/main.83267219.chunk.js.map",
+    "runtime-main.js": "/date-picker/static/js/runtime-main.8152248f.js",
+    "runtime-main.js.map": "/date-picker/static/js/runtime-main.8152248f.js.map",
+    "static/js/2.2918189a.chunk.js": "/date-picker/static/js/2.2918189a.chunk.js",
+    "static/js/2.2918189a.chunk.js.map": "/date-picker/static/js/2.2918189a.chunk.js.map",
+    "index.html": "/date-picker/index.html",
+    "precache-manifest.2b136ca7f60f98397b734aca8f71bccd.js": "/date-picker/precache-manifest.2b136ca7f60f98397b734aca8f71bccd.js",
+    "service-worker.js": "/date-picker/service-worker.js",
+    "static/js/2.2918189a.chunk.js.LICENSE": "/date-picker/static/js/2.2918189a.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8152248f.js",
+    "static/js/2.2918189a.chunk.js",
+    "static/js/main.83267219.chunk.js"
+  ]
+}
