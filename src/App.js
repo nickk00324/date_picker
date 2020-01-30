@@ -47,21 +47,43 @@ const MainStyle = styled.div`
   }
 `;
 
-const date = new Date();
-
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentDate: new Date(),
       startDate: "",
       endDate: "",
-      currentMonth: date.getMonth(),
-      currentYear: date.getFullYear(),
+      currentMonth: "",
+      currentYear: "",
       startDateString: "",
       endDateString: "",
       picker: "",
       showPicker: false
     };
+  }
+
+  getCurrentDate = () => {
+    let date = new Date();
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const day = date.getDate();
+    date = new Date(year, month, day);
+    this.setState({
+      currentDate: date
+    });
+  };
+
+  setCurrentMonthAndYear = () => {
+    this.setState({
+      currentMonth: this.state.currentDate.getMonth(),
+      currentYear: this.state.currentDate.getFullYear()
+    });
+  };
+
+  componentDidMount() {
+    this.getCurrentDate();
+    this.setCurrentMonthAndYear();
   }
 
   handleClick = e => {
@@ -71,22 +93,36 @@ export default class App extends Component {
       e.target.textContent
     );
     let dateArr = clickedDate.toString().split(" ");
-    if (clickedDate < date) return;
-    if (this.state.picker === "start") {
-      this.setState({
-        startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
-        startDate: clickedDate,
-        picker: "end",
-        endDate: clickedDate > this.state.endDate ? "" : this.state.endDate,
-        endDateString:
-          clickedDate > this.state.endDate ? "" : this.state.endDateString
-      });
-    } else if (this.state.picker === "end") {
-      this.setState({
-        endDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
-        endDate: !this.state.startDate ? "" : clickedDate,
-        startDate: !this.state.startDate ? clickedDate : this.state.startDate
-      });
+    if (clickedDate < this.state.currentDate) return;
+    switch (this.state.picker) {
+      case "start":
+        this.setState({
+          startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+          startDate: clickedDate,
+          picker: "end",
+          endDate: clickedDate > this.state.endDate ? "" : this.state.endDate,
+          endDateString:
+            clickedDate > this.state.endDate ? "" : this.state.endDateString
+        });
+        break;
+      case "end":
+        if (this.state.startDate && clickedDate < this.state.startDate) {
+          this.setState({
+            startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+            startDate: clickedDate,
+            picker: "end"
+          });
+        } else {
+          this.setState({
+            endDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+            endDate: !this.state.startDate ? "" : clickedDate,
+            startDate: !this.state.startDate
+              ? clickedDate
+              : this.state.startDate
+          });
+        }
+        break;
+      default:
     }
   };
 
