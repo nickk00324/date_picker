@@ -100,14 +100,24 @@ export default class App extends Component {
     if (clickedDate < this.state.currentDate) return;
     switch (this.state.picker) {
       case "start":
-        this.setState({
-          startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
-          startDate: clickedDate,
-          picker: "end",
-          endDate: clickedDate > this.state.endDate ? "" : this.state.endDate,
-          endDateString:
-            clickedDate > this.state.endDate ? "" : this.state.endDateString
-        });
+        console.log(this.state.endDate);
+        console.log(clickedDate < this.state.endDate);
+        if (!this.state.endDate && clickedDate < this.state.endDate) {
+          this.setState({
+            startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+            startDate: clickedDate,
+            picker: "end"
+          });
+        } else {
+          this.setState({
+            startDateString: `${dateArr[0]}, ${dateArr[1]} ${dateArr[2]}`,
+            startDate: clickedDate,
+            picker: "end",
+            endDate: clickedDate > this.state.endDate ? "" : this.state.endDate,
+            endDateString:
+              clickedDate > this.state.endDate ? "" : this.state.endDateString
+          });
+        }
         break;
       case "end":
         // instead of preventing the user from choosing, just set the end date
@@ -126,7 +136,7 @@ export default class App extends Component {
             // initializing start and end dates as empty strings allow easy checking
             // but also kind of repetitive checks preventing trying to access methods
             // that don't exist
-            endDate: !this.state.startDate ? "" : clickedDate,
+            endDate: clickedDate,
             startDate: !this.state.startDate
               ? clickedDate
               : this.state.startDate
