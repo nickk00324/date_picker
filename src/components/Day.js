@@ -8,8 +8,17 @@ const DayStyles = styled.div`
   align-items: center;
   height: 30px;
   padding: 10px;
+  color: ${props => {
+    if (props.isInvalid) {
+      return "#aaa";
+    } else {
+      return "#000";
+    }
+  }};
   :hover {
-    background: #3bf5ff;
+    background: ${props => {
+      return props.isInvalid ? "transparent" : "#3bf5ff";
+    }};
   }
   transition: all 0.3s;
   background: ${props => {
@@ -28,6 +37,7 @@ const Day = props => {
     <DayStyles
       isSelected={props.isSelected}
       isIncludedInSelection={props.isIncludedInSelection}
+      isInvalid={props.isInvalid}
       // TODO fix the prop drilling that is going on here
       onClick={props.handleClick}
     >

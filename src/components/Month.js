@@ -74,6 +74,7 @@ const Month = props => {
         currentYear={props.currentYear}
         startDate={props.startDate}
         endDate={props.endDate}
+        currentDate={props.currentDate}
       />
     </MonthStyles>
   );

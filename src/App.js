@@ -204,6 +204,7 @@ export default class App extends Component {
             changeMonth={this.changeMonth}
             currentMonth={this.state.currentMonth}
             currentYear={this.state.currentYear}
+            currentDate={this.state.currentDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
           />

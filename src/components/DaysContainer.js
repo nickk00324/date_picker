@@ -18,6 +18,11 @@ const DaysContainer = props => {
     return false;
   };
 
+  const isInvalid = date => {
+    if (props.currentDate > date) return true;
+    return false;
+  };
+
   const isSelected = date => {
     // checks all variations of start and end dates before trying to access
     // methods that might not exist i.e. one of them is the initial empty string value
@@ -43,6 +48,7 @@ const DaysContainer = props => {
           handleClick={props.handleClick}
           isIncludedInSelection={isIncludedInSelection(date)}
           isSelected={isSelected(date)}
+          isInvalid={isInvalid(date)}
           day={i}
           key={date}
         />
